@@ -58,19 +58,19 @@ public class LoginGui extends javax.swing.JFrame {
         LoginPnl.setName("LoginPnl"); // NOI18N
         LoginPnl.setOpaque(false);
 
-        loginLbl.setFont(new java.awt.Font("Bitstream Charter", 1, 14)); // NOI18N
+        loginLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 20)); // NOI18N
         loginLbl.setForeground(new java.awt.Color(255, 255, 255));
         loginLbl.setText("Pseudo"); // NOI18N
         loginLbl.setToolTipText("user name"); // NOI18N
         loginLbl.setName("loginLbl"); // NOI18N
 
-        pwdLbl.setFont(new java.awt.Font("Bitstream Charter", 1, 14)); // NOI18N
+        pwdLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 20)); // NOI18N
         pwdLbl.setForeground(new java.awt.Color(255, 255, 255));
         pwdLbl.setText("Password"); // NOI18N
         pwdLbl.setToolTipText("User Password"); // NOI18N
         pwdLbl.setName("pwdLbl"); // NOI18N
 
-        loginTfld.setFont(new java.awt.Font("Bitstream Charter", 0, 13)); // NOI18N
+        loginTfld.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 19)); // NOI18N
         loginTfld.setToolTipText("enter the user name"); // NOI18N
         loginTfld.setName("loginTfld"); // NOI18N
         loginTfld.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -79,7 +79,7 @@ public class LoginGui extends javax.swing.JFrame {
             }
         });
 
-        pwdTfld.setFont(new java.awt.Font("Bitstream Charter", 0, 11)); // NOI18N
+        pwdTfld.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 19)); // NOI18N
         pwdTfld.setToolTipText("Input user password"); // NOI18N
         pwdTfld.setName("pwdTfld"); // NOI18N
         pwdTfld.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -94,16 +94,17 @@ public class LoginGui extends javax.swing.JFrame {
             LoginPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LoginPnlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(LoginPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(LoginPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LoginPnlLayout.createSequentialGroup()
                         .addComponent(loginLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loginTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(loginTfld))
                     .addGroup(LoginPnlLayout.createSequentialGroup()
-                        .addComponent(pwdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pwdTfld)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pwdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(pwdTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         LoginPnlLayout.setVerticalGroup(
             LoginPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,12 +112,12 @@ public class LoginGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(LoginPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loginTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(loginTfld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(LoginPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pwdTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pwdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         LoginPnlLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {loginTfld, pwdTfld});
@@ -153,22 +154,22 @@ public class LoginGui extends javax.swing.JFrame {
         getContentPane().add(okBtn);
         okBtn.setBounds(270, 180, 80, 25);
 
-        copyRightLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 10)); // NOI18N
+        copyRightLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 12)); // NOI18N
         copyRightLbl.setForeground(new java.awt.Color(255, 255, 255));
         copyRightLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         copyRightLbl.setText("© Copyright 2015. All Rights Reserved."); // NOI18N
         copyRightLbl.setName("copyRightLbl"); // NOI18N
         getContentPane().add(copyRightLbl);
-        copyRightLbl.setBounds(230, 220, 220, 30);
+        copyRightLbl.setBounds(200, 220, 250, 30);
 
         icebookVersionInfoLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 13)); // NOI18N
         icebookVersionInfoLbl.setForeground(new java.awt.Color(255, 255, 255));
-        icebookVersionInfoLbl.setText("IceBook v1.0.0.1  made by Shelby"); // NOI18N
+        icebookVersionInfoLbl.setText("Carnet v1.0.1  made by Shelby"); // NOI18N
         icebookVersionInfoLbl.setName("icebookVersionInfoLbl"); // NOI18N
         getContentPane().add(icebookVersionInfoLbl);
         icebookVersionInfoLbl.setBounds(0, 220, 220, 30);
 
-        banniereLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 24)); // NOI18N
+        banniereLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 28)); // NOI18N
         banniereLbl.setForeground(new java.awt.Color(255, 255, 255));
         banniereLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         banniereLbl.setText("Authentification"); // NOI18N
