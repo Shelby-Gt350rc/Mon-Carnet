@@ -58,19 +58,19 @@ public class LoginGui extends javax.swing.JFrame {
         LoginPnl.setName("LoginPnl"); // NOI18N
         LoginPnl.setOpaque(false);
 
-        loginLbl.setFont(new java.awt.Font("Palatino Linotype", 1, 14)); // NOI18N
+        loginLbl.setFont(new java.awt.Font("Bitstream Charter", 1, 14)); // NOI18N
         loginLbl.setForeground(new java.awt.Color(255, 255, 255));
-        loginLbl.setText("User"); // NOI18N
+        loginLbl.setText("Pseudo"); // NOI18N
         loginLbl.setToolTipText("user name"); // NOI18N
         loginLbl.setName("loginLbl"); // NOI18N
 
-        pwdLbl.setFont(new java.awt.Font("Palatino Linotype", 1, 14)); // NOI18N
+        pwdLbl.setFont(new java.awt.Font("Bitstream Charter", 1, 14)); // NOI18N
         pwdLbl.setForeground(new java.awt.Color(255, 255, 255));
         pwdLbl.setText("Password"); // NOI18N
         pwdLbl.setToolTipText("User Password"); // NOI18N
         pwdLbl.setName("pwdLbl"); // NOI18N
 
-        loginTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 13)); // NOI18N
+        loginTfld.setFont(new java.awt.Font("Bitstream Charter", 0, 13)); // NOI18N
         loginTfld.setToolTipText("enter the user name"); // NOI18N
         loginTfld.setName("loginTfld"); // NOI18N
         loginTfld.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -79,7 +79,7 @@ public class LoginGui extends javax.swing.JFrame {
             }
         });
 
-        pwdTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 11)); // NOI18N
+        pwdTfld.setFont(new java.awt.Font("Bitstream Charter", 0, 11)); // NOI18N
         pwdTfld.setToolTipText("Input user password"); // NOI18N
         pwdTfld.setName("pwdTfld"); // NOI18N
         pwdTfld.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -116,7 +116,7 @@ public class LoginGui extends javax.swing.JFrame {
                 .addGroup(LoginPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pwdTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pwdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         LoginPnlLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {loginTfld, pwdTfld});
@@ -124,7 +124,7 @@ public class LoginGui extends javax.swing.JFrame {
         getContentPane().add(LoginPnl);
         LoginPnl.setBounds(140, 50, 300, 120);
 
-        cancelBtn.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        cancelBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 12)); // NOI18N
         cancelBtn.setText("Cancel"); // NOI18N
         cancelBtn.setToolTipText("Zuuut You have done an error refresh it  now!"); // NOI18N
         cancelBtn.setName("cancelBtn"); // NOI18N
@@ -136,7 +136,7 @@ public class LoginGui extends javax.swing.JFrame {
         getContentPane().add(cancelBtn);
         cancelBtn.setBounds(360, 180, 80, 25);
 
-        okBtn.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        okBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 12)); // NOI18N
         okBtn.setText("Log in"); // NOI18N
         okBtn.setToolTipText("Enjoy IceBook apps !!!"); // NOI18N
         okBtn.setName("okBtn"); // NOI18N
@@ -153,22 +153,22 @@ public class LoginGui extends javax.swing.JFrame {
         getContentPane().add(okBtn);
         okBtn.setBounds(270, 180, 80, 25);
 
-        copyRightLbl.setFont(new java.awt.Font("Palatino Linotype", 1, 11)); // NOI18N
+        copyRightLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 10)); // NOI18N
         copyRightLbl.setForeground(new java.awt.Color(255, 255, 255));
         copyRightLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         copyRightLbl.setText("© Copyright 2015. All Rights Reserved."); // NOI18N
         copyRightLbl.setName("copyRightLbl"); // NOI18N
         getContentPane().add(copyRightLbl);
-        copyRightLbl.setBounds(230, 220, 210, 30);
+        copyRightLbl.setBounds(230, 220, 220, 30);
 
-        icebookVersionInfoLbl.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        icebookVersionInfoLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 13)); // NOI18N
         icebookVersionInfoLbl.setForeground(new java.awt.Color(255, 255, 255));
-        icebookVersionInfoLbl.setText("IceBook v1.0.0.1  made by 14K .inc"); // NOI18N
+        icebookVersionInfoLbl.setText("IceBook v1.0.0.1  made by Shelby"); // NOI18N
         icebookVersionInfoLbl.setName("icebookVersionInfoLbl"); // NOI18N
         getContentPane().add(icebookVersionInfoLbl);
-        icebookVersionInfoLbl.setBounds(0, 220, 190, 30);
+        icebookVersionInfoLbl.setBounds(0, 220, 220, 30);
 
-        banniereLbl.setFont(new java.awt.Font("Palatino Linotype", 1, 24)); // NOI18N
+        banniereLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 24)); // NOI18N
         banniereLbl.setForeground(new java.awt.Color(255, 255, 255));
         banniereLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         banniereLbl.setText("Authentification"); // NOI18N
