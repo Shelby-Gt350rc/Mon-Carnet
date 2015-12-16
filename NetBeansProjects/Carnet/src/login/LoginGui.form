@@ -97,7 +97,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Pseudo" noResource="true"/>
-            <Property name="toolTipText" type="java.lang.String" value="user name" noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="User name" noResource="true"/>
             <Property name="name" type="java.lang.String" value="loginLbl" noResource="true"/>
           </Properties>
         </Component>
@@ -110,7 +110,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Password" noResource="true"/>
-            <Property name="toolTipText" type="java.lang.String" value="User Password" noResource="true"/>
+            <Property name="toolTipText" type="java.lang.String" value="User password" noResource="true"/>
             <Property name="name" type="java.lang.String" value="pwdLbl" noResource="true"/>
           </Properties>
         </Component>

@@ -61,13 +61,13 @@ public class LoginGui extends javax.swing.JFrame {
         loginLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 20)); // NOI18N
         loginLbl.setForeground(new java.awt.Color(255, 255, 255));
         loginLbl.setText("Pseudo"); // NOI18N
-        loginLbl.setToolTipText("user name"); // NOI18N
+        loginLbl.setToolTipText("User name"); // NOI18N
         loginLbl.setName("loginLbl"); // NOI18N
 
         pwdLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 20)); // NOI18N
         pwdLbl.setForeground(new java.awt.Color(255, 255, 255));
         pwdLbl.setText("Password"); // NOI18N
-        pwdLbl.setToolTipText("User Password"); // NOI18N
+        pwdLbl.setToolTipText("User password"); // NOI18N
         pwdLbl.setName("pwdLbl"); // NOI18N
 
         loginTfld.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 19)); // NOI18N
