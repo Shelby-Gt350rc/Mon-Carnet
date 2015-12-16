@@ -189,7 +189,7 @@ public class LoginGui extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exitLbl);
-        exitLbl.setBounds(0, 0, 16, 16);
+        exitLbl.setBounds(430, 0, 16, 16);
 
         infosLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 2, 14)); // NOI18N
         infosLbl.setForeground(new java.awt.Color(250, 243, 243));
