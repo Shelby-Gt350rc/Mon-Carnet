@@ -359,7 +359,7 @@ public class LoginGui extends javax.swing.JFrame {
                 dispose();
                 System.exit(0);
             }else{
-                if(pwdSaisie.equals("Winchester") && loginSaisie.equals("14K")){
+                if(pwdSaisie.equals("Winchester") && loginSaisie.equals("Shelby")){
                     valeur = true;
                 }
                 else{
