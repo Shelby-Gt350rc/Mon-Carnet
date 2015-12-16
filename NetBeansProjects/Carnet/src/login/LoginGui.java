@@ -190,12 +190,12 @@ public class LoginGui extends javax.swing.JFrame {
         getContentPane().add(exitLbl);
         exitLbl.setBounds(0, 0, 16, 16);
 
-        infosLbl.setFont(new java.awt.Font("Palatino Linotype", 2, 12)); // NOI18N
-        infosLbl.setForeground(new java.awt.Color(255, 255, 255));
+        infosLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 2, 14)); // NOI18N
+        infosLbl.setForeground(new java.awt.Color(250, 243, 243));
         infosLbl.setText(resourceMap.getString("infosLbl.text")); // NOI18N
         infosLbl.setName("infosLbl"); // NOI18N
         getContentPane().add(infosLbl);
-        infosLbl.setBounds(140, 180, 120, 20);
+        infosLbl.setBounds(100, 180, 160, 20);
 
         logoLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/resources/aboutCarnetdb.png"))); // NOI18N
         logoLbl.setText(resourceMap.getString("logoLbl.text")); // NOI18N

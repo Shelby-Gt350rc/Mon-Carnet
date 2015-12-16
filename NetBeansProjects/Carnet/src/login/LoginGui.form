@@ -253,17 +253,17 @@
     <Component class="javax.swing.JLabel" name="infosLbl">
       <Properties>
         <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Palatino Linotype" size="12" style="2"/>
+          <Font name="LM Roman Dunhill 10" size="14" style="2"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+          <Color blue="f3" green="f3" red="fa" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" resourceKey="infosLbl.text"/>
         <Property name="name" type="java.lang.String" value="infosLbl" noResource="true"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="140" y="180" width="120" height="20"/>
+          <AbsoluteConstraints x="100" y="180" width="160" height="20"/>
         </Constraint>
       </Constraints>
     </Component>
