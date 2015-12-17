@@ -118,10 +118,10 @@ public class CarnetView extends FrameView {
         mainPanel.setName("mainPanel"); // NOI18N
 
         boiteGlobale.setName("boiteGlobale"); // NOI18N
-        boiteGlobale.setLayout(new java.awt.GridLayout());
+        boiteGlobale.setLayout(new java.awt.GridLayout(1, 0));
 
+        boiteContactsPnl.setBackground(new java.awt.Color(255, 255, 255));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(carnet.CarnetApp.class).getContext().getResourceMap(CarnetView.class);
-        boiteContactsPnl.setBackground(resourceMap.getColor("boiteContactsPnl.background")); // NOI18N
         boiteContactsPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteContactsPnl.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Utopia", 0, 19), new java.awt.Color(45, 23, 250))); // NOI18N
         boiteContactsPnl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 15)); // NOI18N
         boiteContactsPnl.setName("boiteContactsPnl"); // NOI18N
@@ -139,6 +139,7 @@ public class CarnetView extends FrameView {
 
         boiteGlobale.add(boiteContactsPnl);
 
+        boiteInformationPnl.setBackground(new java.awt.Color(255, 255, 255));
         boiteInformationPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteInformationPnl.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Utopia", 0, 19), new java.awt.Color(27, 15, 248))); // NOI18N
         boiteInformationPnl.setName("boiteInformationPnl"); // NOI18N
 

@@ -4,7 +4,7 @@
 
 package carnet;
 
-import login.LoginGui;
+import com.shelby.carnet.security.login.LoginGui;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 

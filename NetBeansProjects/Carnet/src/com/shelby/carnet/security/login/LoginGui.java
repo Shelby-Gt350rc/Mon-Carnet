@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package login;
+package com.shelby.carnet.security.login;
 
 import carnet.CarnetApp;
 import java.awt.Dimension;
@@ -178,7 +178,7 @@ public class LoginGui extends javax.swing.JFrame {
         banniereLbl.setBounds(10, 0, 430, 40);
 
         exitLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 11)); // NOI18N
-        exitLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/resources/fermer.GIF"))); // NOI18N
+        exitLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/shelby/carnet/security/login/resources/fermer.GIF"))); // NOI18N
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(carnet.CarnetApp.class).getContext().getResourceMap(LoginGui.class);
         exitLbl.setText(resourceMap.getString("exitLbl.text")); // NOI18N
         exitLbl.setToolTipText("Close this Apps !!!"); // NOI18N
@@ -198,14 +198,14 @@ public class LoginGui extends javax.swing.JFrame {
         getContentPane().add(infosLbl);
         infosLbl.setBounds(100, 180, 160, 20);
 
-        logoLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/resources/aboutCarnetdb.png"))); // NOI18N
+        logoLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/shelby/carnet/security/login/resources/aboutCarnetdb.png"))); // NOI18N
         logoLbl.setText(resourceMap.getString("logoLbl.text")); // NOI18N
         logoLbl.setName("logoLbl"); // NOI18N
         getContentPane().add(logoLbl);
         logoLbl.setBounds(10, 20, 140, 170);
 
         fondLoginLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 12)); // NOI18N
-        fondLoginLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/fondLogin.jpg"))); // NOI18N
+        fondLoginLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/shelby/carnet/security/login/fondLogin.jpg"))); // NOI18N
         fondLoginLbl.setName("fondLoginLbl"); // NOI18N
         getContentPane().add(fondLoginLbl);
         fondLoginLbl.setBounds(0, 0, 450, 250);
