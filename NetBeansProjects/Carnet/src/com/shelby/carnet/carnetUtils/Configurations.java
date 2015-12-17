@@ -59,9 +59,9 @@ public class Configurations extends javax.swing.JFrame {
         loginTfld = new javax.swing.JTextField();
         pwdLbl = new javax.swing.JLabel();
         pwdTfld = new javax.swing.JPasswordField();
-        precedentBtn = new javax.swing.JButton();
-        installerBtn = new javax.swing.JButton();
-        quitterBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
+        installBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
         infosPnl = new javax.swing.JPanel();
         verionInfosLbl = new javax.swing.JLabel();
         fabricantInfosLbl = new javax.swing.JLabel();
@@ -112,7 +112,7 @@ public class Configurations extends javax.swing.JFrame {
         OsLbl.setBounds(120, 80, 21, 22);
 
         winOsRbtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 15)); // NOI18N
-        winOsRbtn.setForeground(new java.awt.Color(0, 0, 204));
+        winOsRbtn.setForeground(java.awt.Color.white);
         winOsRbtn.setText(resourceMap.getString("winOsRbtn.text")); // NOI18N
         winOsRbtn.setToolTipText(resourceMap.getString("winOsRbtn.toolTipText")); // NOI18N
         winOsRbtn.setName("winOsRbtn"); // NOI18N
@@ -120,7 +120,7 @@ public class Configurations extends javax.swing.JFrame {
         winOsRbtn.setBounds(220, 80, 76, 21);
 
         linOsRbtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 15)); // NOI18N
-        linOsRbtn.setForeground(new java.awt.Color(0, 0, 204));
+        linOsRbtn.setForeground(java.awt.Color.white);
         linOsRbtn.setText(resourceMap.getString("linOsRbtn.text")); // NOI18N
         linOsRbtn.setToolTipText(resourceMap.getString("linOsRbtn.toolTipText")); // NOI18N
         linOsRbtn.setName("linOsRbtn"); // NOI18N
@@ -132,7 +132,7 @@ public class Configurations extends javax.swing.JFrame {
         separation.setBounds(152, 104, 368, 2);
 
         titreLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 18)); // NOI18N
-        titreLbl.setForeground(new java.awt.Color(0, 0, 204));
+        titreLbl.setForeground(java.awt.Color.white);
         titreLbl.setText(resourceMap.getString("titreLbl.text")); // NOI18N
         titreLbl.setToolTipText(resourceMap.getString("titreLbl.toolTipText")); // NOI18N
         titreLbl.setName("titreLbl"); // NOI18N
@@ -147,7 +147,7 @@ public class Configurations extends javax.swing.JFrame {
         boiteGlobale.add(loginLbl);
         loginLbl.setBounds(160, 140, 103, 22);
 
-        loginTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        loginTfld.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
         loginTfld.setName("loginTfld"); // NOI18N
         loginTfld.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -165,7 +165,7 @@ public class Configurations extends javax.swing.JFrame {
         boiteGlobale.add(pwdLbl);
         pwdLbl.setBounds(160, 180, 105, 32);
 
-        pwdTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        pwdTfld.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
         pwdTfld.setName("pwdTfld"); // NOI18N
         pwdTfld.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -175,40 +175,40 @@ public class Configurations extends javax.swing.JFrame {
         boiteGlobale.add(pwdTfld);
         pwdTfld.setBounds(270, 180, 174, 32);
 
-        precedentBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
-        precedentBtn.setText(resourceMap.getString("precedentBtn.text")); // NOI18N
-        precedentBtn.setName("precedentBtn"); // NOI18N
-        precedentBtn.addActionListener(new java.awt.event.ActionListener() {
+        backBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
+        backBtn.setText(resourceMap.getString("backBtn.text")); // NOI18N
+        backBtn.setName("backBtn"); // NOI18N
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precedentBtnActionPerformed(evt);
+                backBtnActionPerformed(evt);
             }
         });
-        boiteGlobale.add(precedentBtn);
-        precedentBtn.setBounds(290, 220, 46, 30);
+        boiteGlobale.add(backBtn);
+        backBtn.setBounds(290, 220, 46, 30);
 
-        installerBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
-        installerBtn.setText(resourceMap.getString("installerBtn.text")); // NOI18N
-        installerBtn.setToolTipText(resourceMap.getString("installerBtn.toolTipText")); // NOI18N
-        installerBtn.setName("installerBtn"); // NOI18N
-        installerBtn.addActionListener(new java.awt.event.ActionListener() {
+        installBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
+        installBtn.setText(resourceMap.getString("installBtn.text")); // NOI18N
+        installBtn.setToolTipText(resourceMap.getString("installBtn.toolTipText")); // NOI18N
+        installBtn.setName("installBtn"); // NOI18N
+        installBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                installerBtnActionPerformed(evt);
+                installBtnActionPerformed(evt);
             }
         });
-        boiteGlobale.add(installerBtn);
-        installerBtn.setBounds(340, 220, 55, 30);
+        boiteGlobale.add(installBtn);
+        installBtn.setBounds(340, 220, 55, 30);
 
-        quitterBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
-        quitterBtn.setText(resourceMap.getString("quitterBtn.text")); // NOI18N
-        quitterBtn.setToolTipText(resourceMap.getString("quitterBtn.toolTipText")); // NOI18N
-        quitterBtn.setName("quitterBtn"); // NOI18N
-        quitterBtn.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 16)); // NOI18N
+        exitBtn.setText(resourceMap.getString("exitBtn.text")); // NOI18N
+        exitBtn.setToolTipText(resourceMap.getString("exitBtn.toolTipText")); // NOI18N
+        exitBtn.setName("exitBtn"); // NOI18N
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitterBtnActionPerformed(evt);
+                exitBtnActionPerformed(evt);
             }
         });
-        boiteGlobale.add(quitterBtn);
-        quitterBtn.setBounds(400, 220, 43, 30);
+        boiteGlobale.add(exitBtn);
+        exitBtn.setBounds(400, 220, 43, 30);
 
         infosPnl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 15)); // NOI18N
         infosPnl.setName("infosPnl"); // NOI18N
@@ -258,7 +258,7 @@ public class Configurations extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void quitterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterBtnActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
        String[] confirmation = {"Oui", "Non"}; 
     int rang;
       rang = JOptionPane.showOptionDialog(null, "Voulez-vous annuler l'installation?", "Quitter IceBook v1.0.3 !",
@@ -268,12 +268,12 @@ public class Configurations extends javax.swing.JFrame {
       if("Oui".equals(selectionner)){
         System.exit(0);
       }  
-    }//GEN-LAST:event_quitterBtnActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
     
-    private void installerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installerBtnActionPerformed
+    private void installBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installBtnActionPerformed
         //debut installation et verification des informations
         validation();
-    }//GEN-LAST:event_installerBtnActionPerformed
+    }//GEN-LAST:event_installBtnActionPerformed
     
     private void pwdTfldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pwdTfldKeyReleased
         //appel de la methode validation après le relachement de la touche Enter
@@ -317,13 +317,13 @@ public class Configurations extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sauvegardeCBoxActionPerformed
     
-    private void precedentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precedentBtnActionPerformed
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // Action sur le bouton precedent
         dispose();
         Install installation = new Install();
         installation.setVisible(true);
         installation.estSelectionner(true);
-    }//GEN-LAST:event_precedentBtnActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
     
     private String emplacement;
     private String database;
@@ -359,21 +359,21 @@ public class Configurations extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel OsLbl;
+    private javax.swing.JButton backBtn;
     private javax.swing.JPanel boiteGlobale;
     private javax.swing.JLabel configFondLbl;
     private javax.swing.JLabel emplacementLbl;
+    private javax.swing.JButton exitBtn;
     private javax.swing.JLabel fabricantInfosLbl;
     private javax.swing.ButtonGroup grpBtn;
     private javax.swing.JPanel infosPnl;
-    private javax.swing.JButton installerBtn;
+    private javax.swing.JButton installBtn;
     private javax.swing.JRadioButton linOsRbtn;
     private javax.swing.JLabel loginLbl;
     private javax.swing.JTextField loginTfld;
     private javax.swing.JLabel logoLbl;
-    private javax.swing.JButton precedentBtn;
     private javax.swing.JLabel pwdLbl;
     private javax.swing.JPasswordField pwdTfld;
-    private javax.swing.JButton quitterBtn;
     private javax.swing.JComboBox sauvegardeCBox;
     private javax.swing.JSeparator separation;
     private javax.swing.JLabel titreLbl;

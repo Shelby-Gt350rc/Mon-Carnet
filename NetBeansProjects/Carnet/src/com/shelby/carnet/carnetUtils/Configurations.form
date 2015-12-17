@@ -134,7 +134,7 @@
               <Font name="LM Roman Dunhill 10" size="15" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="0" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="winOsRbtn.text"/>
             <Property name="toolTipText" type="java.lang.String" resourceKey="winOsRbtn.toolTipText"/>
@@ -152,7 +152,7 @@
               <Font name="LM Roman Dunhill 10" size="15" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="0" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="linOsRbtn.text"/>
             <Property name="toolTipText" type="java.lang.String" resourceKey="linOsRbtn.toolTipText"/>
@@ -180,7 +180,7 @@
               <Font name="LM Roman Dunhill 10" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="0" red="0" type="rgb"/>
+              <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
             <Property name="text" type="java.lang.String" resourceKey="titreLbl.text"/>
             <Property name="toolTipText" type="java.lang.String" resourceKey="titreLbl.toolTipText"/>
@@ -213,7 +213,7 @@
         <Component class="javax.swing.JTextField" name="loginTfld">
           <Properties>
             <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Palatino Linotype" size="14" style="0"/>
+              <Font name="LM Roman Dunhill 10" size="16" style="1"/>
             </Property>
             <Property name="name" type="java.lang.String" value="loginTfld" noResource="true"/>
           </Properties>
@@ -245,7 +245,7 @@
         <Component class="javax.swing.JPasswordField" name="pwdTfld">
           <Properties>
             <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Palatino Linotype" size="14" style="0"/>
+              <Font name="LM Roman Dunhill 10" size="16" style="1"/>
             </Property>
             <Property name="name" type="java.lang.String" value="pwdTfld" noResource="true"/>
           </Properties>
@@ -258,16 +258,16 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="precedentBtn">
+        <Component class="javax.swing.JButton" name="backBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="LM Roman Dunhill 10" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" resourceKey="precedentBtn.text"/>
-            <Property name="name" type="java.lang.String" value="precedentBtn" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="backBtn.text"/>
+            <Property name="name" type="java.lang.String" value="backBtn" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precedentBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -275,17 +275,17 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="installerBtn">
+        <Component class="javax.swing.JButton" name="installBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="LM Roman Dunhill 10" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" resourceKey="installerBtn.text"/>
-            <Property name="toolTipText" type="java.lang.String" resourceKey="installerBtn.toolTipText"/>
-            <Property name="name" type="java.lang.String" value="installerBtn" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="installBtn.text"/>
+            <Property name="toolTipText" type="java.lang.String" resourceKey="installBtn.toolTipText"/>
+            <Property name="name" type="java.lang.String" value="installBtn" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="installerBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="installBtnActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -293,17 +293,17 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="quitterBtn">
+        <Component class="javax.swing.JButton" name="exitBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="LM Roman Dunhill 10" size="16" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" resourceKey="quitterBtn.text"/>
-            <Property name="toolTipText" type="java.lang.String" resourceKey="quitterBtn.toolTipText"/>
-            <Property name="name" type="java.lang.String" value="quitterBtn" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="exitBtn.text"/>
+            <Property name="toolTipText" type="java.lang.String" resourceKey="exitBtn.toolTipText"/>
+            <Property name="name" type="java.lang.String" value="exitBtn" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitterBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitBtnActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
