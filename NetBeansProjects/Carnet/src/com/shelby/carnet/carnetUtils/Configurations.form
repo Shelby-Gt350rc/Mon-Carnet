@@ -110,7 +110,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="sgbdLbl">
+        <Component class="javax.swing.JLabel" name="OsLbl">
           <Properties>
             <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="LM Roman Dunhill 10" size="18" style="1"/>
@@ -118,9 +118,9 @@
             <Property name="foreground" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" resourceKey="sgbdLbl.text"/>
-            <Property name="toolTipText" type="java.lang.String" resourceKey="sgbdLbl.toolTipText"/>
-            <Property name="name" type="java.lang.String" value="sgbdLbl" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="OsLbl.text"/>
+            <Property name="toolTipText" type="java.lang.String" resourceKey="OsLbl.toolTipText"/>
+            <Property name="name" type="java.lang.String" value="OsLbl" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

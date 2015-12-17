@@ -28,10 +28,12 @@ public class Configurations extends javax.swing.JFrame {
      */
     public Configurations() {
         initComponents();
-         centerEcran("Configuration"); 
-        sgbdLbl.setVisible(false);
-        winOsRbtn.setVisible(false);
-        linOsRbtn.setVisible(false); 
+         centerEcran("Configuration");
+         grpBtn.add(winOsRbtn);
+         grpBtn.add(linOsRbtn); 
+        OsLbl.setVisible(true);
+        winOsRbtn.setVisible(true);
+        linOsRbtn.setVisible(true); 
     }
     
     /**
@@ -48,7 +50,7 @@ public class Configurations extends javax.swing.JFrame {
         logoLbl = new javax.swing.JLabel();
         emplacementLbl = new javax.swing.JLabel();
         sauvegardeCBox = new javax.swing.JComboBox();
-        sgbdLbl = new javax.swing.JLabel();
+        OsLbl = new javax.swing.JLabel();
         winOsRbtn = new javax.swing.JRadioButton();
         linOsRbtn = new javax.swing.JRadioButton();
         separation = new javax.swing.JSeparator();
@@ -101,13 +103,13 @@ public class Configurations extends javax.swing.JFrame {
         boiteGlobale.add(sauvegardeCBox);
         sauvegardeCBox.setBounds(220, 40, 161, 29);
 
-        sgbdLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 18)); // NOI18N
-        sgbdLbl.setForeground(java.awt.Color.white);
-        sgbdLbl.setText(resourceMap.getString("sgbdLbl.text")); // NOI18N
-        sgbdLbl.setToolTipText(resourceMap.getString("sgbdLbl.toolTipText")); // NOI18N
-        sgbdLbl.setName("sgbdLbl"); // NOI18N
-        boiteGlobale.add(sgbdLbl);
-        sgbdLbl.setBounds(120, 80, 21, 22);
+        OsLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 18)); // NOI18N
+        OsLbl.setForeground(java.awt.Color.white);
+        OsLbl.setText(resourceMap.getString("OsLbl.text")); // NOI18N
+        OsLbl.setToolTipText(resourceMap.getString("OsLbl.toolTipText")); // NOI18N
+        OsLbl.setName("OsLbl"); // NOI18N
+        boiteGlobale.add(OsLbl);
+        OsLbl.setBounds(120, 80, 21, 22);
 
         winOsRbtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 1, 15)); // NOI18N
         winOsRbtn.setForeground(new java.awt.Color(0, 0, 204));
@@ -290,41 +292,25 @@ public class Configurations extends javax.swing.JFrame {
     private void sauvegardeCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvegardeCBoxActionPerformed
         String localisation;
         if("Fichier txt".equals(sauvegardeCBox.getSelectedItem())){
-            sgbdLbl.setVisible(false);
-            winOsRbtn.setVisible(false);
-            linOsRbtn.setVisible(false); 
+            OsLbl.setVisible(true); 
             localisation="Fichier texte";
             setEmplacement(localisation);
         }else{
-            if("SGBD-Mysql".equals(sauvegardeCBox.getSelectedItem())){
-                sgbdLbl.setVisible(false);
-                winOsRbtn.setVisible(false);
-                linOsRbtn.setVisible(false); 
+            if("SGBD-Mysql".equals(sauvegardeCBox.getSelectedItem())){ 
                 localisation="SGBD-Mysql";
                 setEmplacement(localisation);
             }else{
-                if("SGBD-Postgresql".equals(sauvegardeCBox.getSelectedItem())){
-                    sgbdLbl.setVisible(false);
-                    winOsRbtn.setVisible(false);
-                    linOsRbtn.setVisible(false); 
+                if("SGBD-Postgresql".equals(sauvegardeCBox.getSelectedItem())){ 
                     localisation="SGBD-Postgresql";
                     setEmplacement(localisation);
                 }else{
                     if("SGBD-Oracle 11g".equals(sauvegardeCBox.getSelectedItem())){
-                        sgbdLbl.setVisible(false);
-                        winOsRbtn.setVisible(false);
-                        linOsRbtn.setVisible(false); 
+                        
                         localisation="SGBD-Oracle 11g";
                         setEmplacement(localisation);
                     }else{
                         localisation="SGBD-FichierTxt";
-                        setEmplacement(localisation);
-                        grpBtn.add(winOsRbtn);
-                        grpBtn.add(linOsRbtn); 
-                        sgbdLbl.setVisible(true);
-                        winOsRbtn.setVisible(true);
-                        linOsRbtn.setVisible(true); 
-                        winOsRbtn.setSelected(true);
+                        setEmplacement(localisation); 
                     }
                 }
             }
@@ -372,6 +358,7 @@ public class Configurations extends javax.swing.JFrame {
     private String urlDatabase ;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel OsLbl;
     private javax.swing.JPanel boiteGlobale;
     private javax.swing.JLabel configFondLbl;
     private javax.swing.JLabel emplacementLbl;
@@ -389,7 +376,6 @@ public class Configurations extends javax.swing.JFrame {
     private javax.swing.JButton quitterBtn;
     private javax.swing.JComboBox sauvegardeCBox;
     private javax.swing.JSeparator separation;
-    private javax.swing.JLabel sgbdLbl;
     private javax.swing.JLabel titreLbl;
     private javax.swing.JLabel verionInfosLbl;
     private javax.swing.JRadioButton winOsRbtn;
