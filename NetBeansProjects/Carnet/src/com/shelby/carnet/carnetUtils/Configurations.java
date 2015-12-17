@@ -259,13 +259,13 @@ public class Configurations extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
-       String[] confirmation = {"Oui", "Non"}; 
+       String[] confirmation = {"Yes", "No"}; 
     int rang;
-      rang = JOptionPane.showOptionDialog(null, "Voulez-vous annuler l'installation?", "Quitter IceBook v1.0.3 !",
+      rang = JOptionPane.showOptionDialog(null, "Voulez-vous annuler l'installation?", "Quitter Carnet v1.0.1 !",
                  JOptionPane.YES_NO_OPTION, JOptionPane.OK_OPTION,
                 null,  confirmation, confirmation[1]);
       String selectionner=confirmation[rang];
-      if("Oui".equals(selectionner)){
+      if("Yes".equals(selectionner)){
         System.exit(0);
       }  
     }//GEN-LAST:event_exitBtnActionPerformed
@@ -477,7 +477,7 @@ public class Configurations extends javax.swing.JFrame {
             new File(dossierIcons).mkdirs(); 
             new File(dossierImages).mkdirs();
             //Creation du fichier.txt dans le dossierConfig créer
-            fichierConfig = dossierConfig + "/" + "iceConfigdb.txt";
+            fichierConfig = dossierConfig + "/" + "carnetConfigdb.txt";
             fichierBatch= dossierConfig +"/"+"transfertImage.bat";
             fichierBatchImage= dossierConfig +"/"+"uploadImage.bat";
             fichierDatabaseContacts = dossierDatabase+"/"+"listeContacts.txt";
