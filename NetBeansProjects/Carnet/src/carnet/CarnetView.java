@@ -101,6 +101,9 @@ public class CarnetView extends FrameView {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        boiteGlobale = new javax.swing.JPanel();
+        boiteContactsPnl = new javax.swing.JPanel();
+        boiteInformationPnl = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -114,20 +117,59 @@ public class CarnetView extends FrameView {
 
         mainPanel.setName("mainPanel"); // NOI18N
 
+        boiteGlobale.setName("boiteGlobale"); // NOI18N
+        boiteGlobale.setLayout(new java.awt.GridLayout());
+
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(carnet.CarnetApp.class).getContext().getResourceMap(CarnetView.class);
+        boiteContactsPnl.setBackground(resourceMap.getColor("boiteContactsPnl.background")); // NOI18N
+        boiteContactsPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteContactsPnl.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Utopia", 0, 19), new java.awt.Color(45, 23, 250))); // NOI18N
+        boiteContactsPnl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 15)); // NOI18N
+        boiteContactsPnl.setName("boiteContactsPnl"); // NOI18N
+
+        javax.swing.GroupLayout boiteContactsPnlLayout = new javax.swing.GroupLayout(boiteContactsPnl);
+        boiteContactsPnl.setLayout(boiteContactsPnlLayout);
+        boiteContactsPnlLayout.setHorizontalGroup(
+            boiteContactsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+        boiteContactsPnlLayout.setVerticalGroup(
+            boiteContactsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 421, Short.MAX_VALUE)
+        );
+
+        boiteGlobale.add(boiteContactsPnl);
+
+        boiteInformationPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteInformationPnl.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Utopia", 0, 19), new java.awt.Color(27, 15, 248))); // NOI18N
+        boiteInformationPnl.setName("boiteInformationPnl"); // NOI18N
+
+        javax.swing.GroupLayout boiteInformationPnlLayout = new javax.swing.GroupLayout(boiteInformationPnl);
+        boiteInformationPnl.setLayout(boiteInformationPnlLayout);
+        boiteInformationPnlLayout.setHorizontalGroup(
+            boiteInformationPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 290, Short.MAX_VALUE)
+        );
+        boiteInformationPnlLayout.setVerticalGroup(
+            boiteInformationPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 421, Short.MAX_VALUE)
+        );
+
+        boiteGlobale.add(boiteInformationPnl);
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addComponent(boiteGlobale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
+            .addComponent(boiteGlobale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(carnet.CarnetApp.class).getContext().getResourceMap(CarnetView.class);
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
@@ -162,11 +204,11 @@ public class CarnetView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 430, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -190,6 +232,9 @@ public class CarnetView extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel boiteContactsPnl;
+    private javax.swing.JPanel boiteGlobale;
+    private javax.swing.JPanel boiteInformationPnl;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
