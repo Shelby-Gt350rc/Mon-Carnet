@@ -1,0 +1,1068 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package carnet;
+
+
+import com.shelby.carnet.carnetUtils.Download;
+import com.shelby.carnet.carnetUtils.Fichier;
+import com.shelby.carnet.security.HexEncode;
+import java.awt.Color;
+import java.io.File;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import java.awt.Image;
+
+/**
+ *
+ * @author Patrick-Noah
+ */
+public class SaisieComptes extends javax.swing.JDialog {
+  private String compte;
+  private String infoComptes; 
+  private String categorie;
+  private String lienHttp; 
+  private String version;
+  private String sgbd;
+  private String login;
+  private String passWord;
+  private String thePass;
+  private String algoDeSecurite;
+  private String decalage;
+  
+  ArrayList listeComptes = new  ArrayList();
+  ArrayList historiqueComptes = new ArrayList();
+  DatabaseTxt fichierConfig= new DatabaseTxt();//Classe ayant le fichier de configuration
+  Download fichierTelch = new Download();
+  
+  private final String databaseComptesUrl=fichierConfig.getDatabaseCompteUrl();
+//  private final String histoDatabaseComptesUrl=fichierConfig.getHistoDatabaseComptesUrl();
+  
+  String[] confirmation = {"Valider", "Annuler","Fermer"}; 
+  String[] confirmationRec = {"Reprendre","Quitter"}; 
+   int rang;
+   
+   
+private  String pwdSaisie ;
+private static final int TAILLE_ALPHABET = 26;
+private String texte; 
+private String encodeSms;
+
+ int clic=0;
+ int clicSecurite=0; 
+ private String logoComptesUrl=fichierConfig.getUrlCompteLogo();
+    private int indice=0;
+    private String urlPhoto= logoComptesUrl;
+    private boolean testSaisie;
+    /**
+     * Creates new form SaisieComptes
+     */
+    public SaisieComptes(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setResizable(false); 
+              decalageCesarLbl.setVisible(false);
+             decalageCesarCBox.setVisible(false);   
+              encryptPasseLbl.setVisible(false);
+              encryptePwdLbl.setVisible(false); 
+    }
+
+    public void setPhoto(String tmp){
+         //Creer un icon
+      ImageIcon iconPhotos = new ImageIcon(tmp);
+      //Transformer l'icone en image
+      Image  uneImage = iconPhotos.getImage();
+      //reduire la taille de l'image de a 128 * 128
+      uneImage = uneImage.getScaledInstance(128, 128, Image.SCALE_SMOOTH);
+      //transformer l'image en Icon
+      iconPhotos.setImage(uneImage);
+      photoLbl.setIcon(iconPhotos);
+    }
+    public String getCompte() {
+        return compte;
+    }
+    public void setCompte(String compte) {
+        this.compte = compte;
+    }
+    public String getInfoComptes() {
+        return infoComptes;
+    }
+    public void setInfoComptes(String infoComptes) {
+        this.infoComptes = infoComptes;
+    }
+    public String getCategorie() {
+        return categorie;
+    }
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+    public String getLienHttp() {
+        return lienHttp;
+    }
+    public void setLienHttp(String lienHttp) {
+        this.lienHttp = lienHttp;
+    } 
+    public String getVersion() {
+        return version;
+    }
+    public void setVersion(String version) {
+        this.version = version;
+    }
+    public String getSgbd() {
+        return sgbd;
+    }
+    public void setSgbd(String sgbd) {
+        this.sgbd = sgbd;
+    }
+    public String getLogin() {
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    public String getPassWord() {
+        return passWord;
+    }
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+    public String getThePass() {
+        return thePass;
+    }
+    public void setThePass(String thePass) { 
+        this.thePass = thePass;
+    }
+    
+     public String getAlgoDeSecurite() {
+        return algoDeSecurite;
+    }
+
+    public void setAlgoDeSecurite(String algoDeSecurite) {
+        this.algoDeSecurite = algoDeSecurite;
+    }
+
+    public String getDecalage() {
+        return decalage;
+    }
+
+    public void setDecalage(String decalage) {
+        this.decalage = decalage;
+    }
+
+    public int getIndice(){
+        return indice;
+    }
+    public void setIndice(int indice){
+        this.indice = indice;
+    }
+    
+    
+    public String password(){ 
+        char[] pwdTab = pwdTfld.getPassword();
+        pwdSaisie = String.copyValueOf(pwdTab);
+        return pwdSaisie.toString(); 
+    }
+    
+     public void setUrlPhoto(String url) {
+        this.urlPhoto = url;
+    }
+    public String getUrlPhoto(){
+        return urlPhoto;
+    }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        photoLbl = new javax.swing.JLabel();
+        infoBuleLbl = new javax.swing.JLabel();
+        comptesLbl = new javax.swing.JLabel();
+        compteTfld = new javax.swing.JTextField();
+        categorieLbl = new javax.swing.JLabel();
+        categorieCBox = new javax.swing.JComboBox();
+        blocA = new javax.swing.JSeparator();
+        InformationSup = new javax.swing.JLabel();
+        laMessagerieLbl = new javax.swing.JLabel();
+        laMessagerieCBox = new javax.swing.JComboBox();
+        lienLbl = new javax.swing.JLabel();
+        lienTfld = new javax.swing.JTextField();
+        versionLbl = new javax.swing.JLabel();
+        versionCBox = new javax.swing.JComboBox();
+        sgbdLbl = new javax.swing.JLabel();
+        sgbdCBox = new javax.swing.JComboBox();
+        blocB = new javax.swing.JSeparator();
+        utilisateurLbl = new javax.swing.JLabel();
+        loginLbl = new javax.swing.JLabel();
+        loginTfld = new javax.swing.JTextField();
+        pwdLb = new javax.swing.JLabel();
+        pwdTfld = new javax.swing.JPasswordField();
+        visuelPwdJcBox = new javax.swing.JCheckBox();
+        visuelPwdLbl = new javax.swing.JLabel();
+        securiteLbl = new javax.swing.JLabel();
+        securiteCBox = new javax.swing.JComboBox();
+        validerCptBtn = new javax.swing.JButton();
+        annulerCptBtn = new javax.swing.JButton();
+        securiteJcBox = new javax.swing.JCheckBox();
+        encodageInfoLbl = new javax.swing.JLabel();
+        decalageCesarCBox = new javax.swing.JComboBox();
+        decalageCesarLbl = new javax.swing.JLabel();
+        encryptPasseLbl = new javax.swing.JLabel();
+        encryptePwdLbl = new javax.swing.JLabel();
+        infoRequiseLbl2 = new javax.swing.JLabel();
+        infoRequiseLbl3 = new javax.swing.JLabel();
+        infoRequiseLbl4 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setName("Form"); // NOI18N
+
+        photoLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        photoLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icebook/resources/mesComptes.png"))); // NOI18N
+        photoLbl.setName("photoLbl"); // NOI18N
+        photoLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                photoLblMouseReleased(evt);
+            }
+        });
+
+        infoBuleLbl.setFont(new java.awt.Font("Palatino Linotype", 2, 11)); // NOI18N
+        infoBuleLbl.setText("cliquez sur cette icone"); // NOI18N
+        infoBuleLbl.setEnabled(false);
+        infoBuleLbl.setName("infoBuleLbl"); // NOI18N
+
+        comptesLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        comptesLbl.setText("Compte"); // NOI18N
+        comptesLbl.setName("comptesLbl"); // NOI18N
+
+        compteTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        compteTfld.setName("compteTfld"); // NOI18N
+
+        categorieLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        categorieLbl.setText("Catégorie"); // NOI18N
+        categorieLbl.setName("categorieLbl"); // NOI18N
+
+        categorieCBox.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        categorieCBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Messagerie", "Réseau social", "SGBD", "Site web", "Système d'exploitation" }));
+        categorieCBox.setName("categorieCBox"); // NOI18N
+        categorieCBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categorieCBoxActionPerformed(evt);
+            }
+        });
+
+        blocA.setName("blocA"); // NOI18N
+
+        InformationSup.setFont(new java.awt.Font("Palatino Linotype", 1, 14)); // NOI18N
+        InformationSup.setText("INFOS SUPPLEMENTAIRE"); // NOI18N
+        InformationSup.setName("InformationSup"); // NOI18N
+
+        laMessagerieLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        laMessagerieLbl.setText("Messageries"); // NOI18N
+        laMessagerieLbl.setName("laMessagerieLbl"); // NOI18N
+
+        laMessagerieCBox.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        laMessagerieCBox.setForeground(new java.awt.Color(0, 0, 204));
+        laMessagerieCBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "? - ?", "Yahoo-mail", "Yahoo - messenger", "Google - mail", "Google plus", "Skype", "Nimbuzz!" }));
+        laMessagerieCBox.setName("laMessagerieCBox"); // NOI18N
+
+        lienLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        lienLbl.setText("Http://"); // NOI18N
+        lienLbl.setName("lienLbl"); // NOI18N
+
+        lienTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        lienTfld.setForeground(new java.awt.Color(0, 0, 204));
+        lienTfld.setName("lienTfld"); // NOI18N
+
+        versionLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        versionLbl.setText("Versions"); // NOI18N
+        versionLbl.setEnabled(false);
+        versionLbl.setName("versionLbl"); // NOI18N
+
+        versionCBox.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        versionCBox.setForeground(new java.awt.Color(0, 0, 204));
+        versionCBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "? - ?", "Win 7 Integral", "Win 7 ultimate", "Win 7 pro", "Win 7 familial", "Win 8.0", "Win 8.1", "Xp Sp1", "XP Sp2", "XP Sp3", "Ubuntu 10.04", "Ubuntu 11.10", "Ubuntu 12.04", "Ubuntu 12.10", "Ubuntu 13.04", "Ubuntu 13.10", "Ubuntu 14.04", "kali", "Fedora", "Red Hat", "Mandriva" }));
+        versionCBox.setEnabled(false);
+        versionCBox.setName("versionCBox"); // NOI18N
+
+        sgbdLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        sgbdLbl.setText("Sgbd"); // NOI18N
+        sgbdLbl.setEnabled(false);
+        sgbdLbl.setName("sgbdLbl"); // NOI18N
+
+        sgbdCBox.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        sgbdCBox.setForeground(new java.awt.Color(0, 0, 204));
+        sgbdCBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "? - ?", "Acess 2003", "Access 2007", "Acess 2010", "Access 2013", "Mysql serveur", "Mysql Wamp", "PostgreSql", "Oracle 10g", "Oracle 11g exp" }));
+        sgbdCBox.setEnabled(false);
+        sgbdCBox.setName("sgbdCBox"); // NOI18N
+
+        blocB.setName("blocB"); // NOI18N
+
+        utilisateurLbl.setFont(new java.awt.Font("Palatino Linotype", 1, 14)); // NOI18N
+        utilisateurLbl.setText("UTILISATEUR"); // NOI18N
+        utilisateurLbl.setName("utilisateurLbl"); // NOI18N
+
+        loginLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        loginLbl.setText("Login"); // NOI18N
+        loginLbl.setName("loginLbl"); // NOI18N
+
+        loginTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        loginTfld.setForeground(new java.awt.Color(0, 0, 204));
+        loginTfld.setName("loginTfld"); // NOI18N
+
+        pwdLb.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        pwdLb.setText("Password"); // NOI18N
+        pwdLb.setName("pwdLb"); // NOI18N
+
+        pwdTfld.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        pwdTfld.setForeground(new java.awt.Color(0, 0, 204));
+        pwdTfld.setName("pwdTfld"); // NOI18N
+
+        visuelPwdJcBox.setFont(new java.awt.Font("Palatino Linotype", 0, 11)); // NOI18N
+        visuelPwdJcBox.setForeground(new java.awt.Color(0, 0, 204));
+        visuelPwdJcBox.setText("affiché/caché:"); // NOI18N
+        visuelPwdJcBox.setName("visuelPwdJcBox"); // NOI18N
+        visuelPwdJcBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                visuelPwdJcBoxMouseClicked(evt);
+            }
+        });
+
+        visuelPwdLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 11)); // NOI18N
+        visuelPwdLbl.setForeground(new java.awt.Color(0, 153, 51));
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(carnet.CarnetApp.class).getContext().getResourceMap(SaisieComptes.class);
+        visuelPwdLbl.setText(resourceMap.getString("visuelPwdLbl.text")); // NOI18N
+        visuelPwdLbl.setEnabled(false);
+        visuelPwdLbl.setName("visuelPwdLbl"); // NOI18N
+
+        securiteLbl.setFont(new java.awt.Font("Palatino Linotype", 2, 14)); // NOI18N
+        securiteLbl.setForeground(new java.awt.Color(255, 0, 0));
+        securiteLbl.setText("sécurité:"); // NOI18N
+        securiteLbl.setName("securiteLbl"); // NOI18N
+
+        securiteCBox.setFont(new java.awt.Font("Palatino Linotype", 2, 11)); // NOI18N
+        securiteCBox.setForeground(new java.awt.Color(0, 0, 204));
+        securiteCBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "? - ?", "Binaire", "Cesar", "Playfair", "Vigenaire" }));
+        securiteCBox.setEnabled(false);
+        securiteCBox.setName("securiteCBox"); // NOI18N
+        securiteCBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                securiteCBoxActionPerformed(evt);
+            }
+        });
+
+        validerCptBtn.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        validerCptBtn.setText("Valider"); // NOI18N
+        validerCptBtn.setName("validerCptBtn"); // NOI18N
+        validerCptBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                validerCptBtnActionPerformed(evt);
+            }
+        });
+
+        annulerCptBtn.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        annulerCptBtn.setText("Annuler"); // NOI18N
+        annulerCptBtn.setName("annulerCptBtn"); // NOI18N
+        annulerCptBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                annulerCptBtnActionPerformed(evt);
+            }
+        });
+
+        securiteJcBox.setFont(new java.awt.Font("Palatino Linotype", 2, 11)); // NOI18N
+        securiteJcBox.setForeground(new java.awt.Color(255, 0, 0));
+        securiteJcBox.setText("on/off"); // NOI18N
+        securiteJcBox.setName("securiteJcBox"); // NOI18N
+        securiteJcBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                securiteJcBoxMouseClicked(evt);
+            }
+        });
+
+        encodageInfoLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 11)); // NOI18N
+        encodageInfoLbl.setForeground(new java.awt.Color(51, 153, 0));
+        encodageInfoLbl.setText("type d'encodage"); // NOI18N
+        encodageInfoLbl.setEnabled(false);
+        encodageInfoLbl.setName("encodageInfoLbl"); // NOI18N
+
+        decalageCesarCBox.setFont(new java.awt.Font("Palatino Linotype", 3, 10)); // NOI18N
+        decalageCesarCBox.setForeground(new java.awt.Color(0, 0, 204));
+        decalageCesarCBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25" }));
+        decalageCesarCBox.setEnabled(false);
+        decalageCesarCBox.setName("decalageCesarCBox"); // NOI18N
+        decalageCesarCBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decalageCesarCBoxActionPerformed(evt);
+            }
+        });
+
+        decalageCesarLbl.setFont(new java.awt.Font("Palatino Linotype", 2, 11)); // NOI18N
+        decalageCesarLbl.setForeground(new java.awt.Color(0, 0, 204));
+        decalageCesarLbl.setText("décalage"); // NOI18N
+        decalageCesarLbl.setEnabled(false);
+        decalageCesarLbl.setName("decalageCesarLbl"); // NOI18N
+
+        encryptPasseLbl.setFont(new java.awt.Font("Palatino Linotype", 0, 10)); // NOI18N
+        encryptPasseLbl.setForeground(new java.awt.Color(0, 0, 204));
+        encryptPasseLbl.setText("Encryt passe"); // NOI18N
+        encryptPasseLbl.setName("encryptPasseLbl"); // NOI18N
+
+        encryptePwdLbl.setFont(new java.awt.Font("Palatino Linotype", 1, 11)); // NOI18N
+        encryptePwdLbl.setForeground(new java.awt.Color(0, 153, 0));
+        encryptePwdLbl.setText("encryt pass "); // NOI18N
+        encryptePwdLbl.setName("encryptePwdLbl"); // NOI18N
+
+        infoRequiseLbl2.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        infoRequiseLbl2.setForeground(new java.awt.Color(255, 0, 0));
+        infoRequiseLbl2.setText("*"); // NOI18N
+        infoRequiseLbl2.setName("infoRequiseLbl2"); // NOI18N
+
+        infoRequiseLbl3.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        infoRequiseLbl3.setForeground(new java.awt.Color(255, 0, 0));
+        infoRequiseLbl3.setText("*"); // NOI18N
+        infoRequiseLbl3.setName("infoRequiseLbl3"); // NOI18N
+
+        infoRequiseLbl4.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        infoRequiseLbl4.setForeground(new java.awt.Color(255, 0, 0));
+        infoRequiseLbl4.setText("*"); // NOI18N
+        infoRequiseLbl4.setName("infoRequiseLbl4"); // NOI18N
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(visuelPwdJcBox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(visuelPwdLbl))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(encryptPasseLbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(encryptePwdLbl))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(securiteLbl)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(securiteJcBox)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(securiteCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(decalageCesarLbl))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(validerCptBtn)
+                                        .addGap(7, 7, 7)
+                                        .addComponent(annulerCptBtn)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(decalageCesarCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(encodageInfoLbl))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(pwdLb)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(pwdTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(infoRequiseLbl4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(loginLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(loginTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(infoRequiseLbl3)))))
+                    .addComponent(InformationSup)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(laMessagerieLbl)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(laMessagerieCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lienLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(versionLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sgbdLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(lienTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(versionCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sgbdCBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(infoBuleLbl)
+                            .addComponent(photoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(comptesLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(compteTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(infoRequiseLbl2))
+                            .addComponent(blocA, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(categorieLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(categorieCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(utilisateurLbl)
+                    .addComponent(blocB, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(photoLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(comptesLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(compteTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(infoRequiseLbl2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(categorieLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categorieCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(blocA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoBuleLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(InformationSup)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(laMessagerieLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(laMessagerieCBox, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lienLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lienTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(versionLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(versionCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sgbdLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sgbdCBox, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(blocB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(utilisateurLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loginLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loginTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoRequiseLbl3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pwdLb, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pwdTfld, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoRequiseLbl4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(visuelPwdJcBox)
+                    .addComponent(visuelPwdLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(encryptPasseLbl)
+                    .addComponent(encryptePwdLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(securiteLbl)
+                    .addComponent(securiteCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(securiteJcBox)
+                    .addComponent(encodageInfoLbl)
+                    .addComponent(decalageCesarCBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(decalageCesarLbl))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(validerCptBtn)
+                    .addComponent(annulerCptBtn))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void categorieCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categorieCBoxActionPerformed
+    if(categorieCBox.getSelectedItem()=="Système d'exploitation"){
+                    versionLbl.setEnabled(true);
+                    versionCBox.setEnabled(true); 
+                     lienLbl.setEnabled(false);
+                    lienTfld.setEnabled(false);
+                    sgbdLbl.setEnabled(false); 
+                    sgbdCBox.setEnabled(false);
+                    laMessagerieLbl.setEnabled(false);
+                    laMessagerieCBox.setEnabled(false);
+                    
+    }    
+    else{  
+        if( categorieCBox.getSelectedItem()=="SGBD"){
+                    versionLbl.setEnabled(false);
+                    versionCBox.setEnabled(false); 
+                     lienLbl.setEnabled(false);
+                    lienTfld.setEnabled(false);
+                    sgbdLbl.setEnabled(true);
+                    sgbdCBox.setEnabled(true);
+                     laMessagerieLbl.setEnabled(false);
+                        laMessagerieCBox.setEnabled(false);
+        }
+        else{    
+                    if( categorieCBox.getSelectedItem()=="Messagerie"){
+                        laMessagerieLbl.setEnabled(true);
+                        laMessagerieCBox.setEnabled(true);
+                        versionLbl.setEnabled(false);
+                        versionCBox.setEnabled(false); 
+                        lienLbl.setEnabled(true);
+                        lienTfld.setEnabled(true);
+                        sgbdLbl.setEnabled(false);
+                        sgbdCBox.setEnabled(false); 
+                    }
+                    else{ 
+                      laMessagerieLbl.setEnabled(false);
+                     laMessagerieCBox.setEnabled(false);
+                    versionLbl.setEnabled(false);
+                    versionCBox.setEnabled(false); 
+                    lienLbl.setEnabled(true);
+                    lienTfld.setEnabled(true);
+                    sgbdLbl.setEnabled(false);
+                    sgbdCBox.setEnabled(false);
+                    }
+        }
+    }  
+    }//GEN-LAST:event_categorieCBoxActionPerformed
+
+    private void visuelPwdJcBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_visuelPwdJcBoxMouseClicked
+      clic+=evt.getClickCount(); 
+        if(clic%2!=0){
+            visuelPwdJcBox.setSelected(true);
+           char[] pwdTab = pwdTfld.getPassword();
+           pwdSaisie = String.copyValueOf(pwdTab);
+        pwdTfld.setText(pwdSaisie.toString());
+        visuelPwdLbl.setEnabled(true);
+        visuelPwdLbl.setText(pwdSaisie); 
+       }
+       else{
+            visuelPwdJcBox.setSelected(false);
+         visuelPwdLbl.setEnabled(false);
+        visuelPwdLbl.setText(""); 
+       } 
+    }//GEN-LAST:event_visuelPwdJcBoxMouseClicked
+
+    private void securiteJcBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_securiteJcBoxMouseClicked
+     clicSecurite+=evt.getClickCount(); 
+        if(clicSecurite%2 !=0){ 
+            securiteJcBox.setSelected(true);
+          changerCouleur(securiteJcBox);
+          changerCouleur(securiteLbl);
+            securiteCBox.setEnabled(true);
+            encodageInfoLbl.setEnabled(true);
+            decalageCesarLbl.setEnabled(true);
+            decalageCesarCBox.setEnabled(true);
+            pwdTfld.setEnabled(false);
+            pwdTfld.setToolTipText("Veillez decocher la  case sécurité pour entrer un nouveau Passe !!!");
+           
+     }else{
+            securiteJcBox.setSelected(false);
+           resetCouleur(securiteJcBox);
+           resetCouleur(securiteLbl);
+          securiteCBox.setEnabled(false);
+          encodageInfoLbl.setEnabled(false);
+          decalageCesarLbl.setEnabled(false);
+          decalageCesarCBox.setEnabled(false);
+          pwdTfld.setEnabled(true);
+     } 
+    }//GEN-LAST:event_securiteJcBoxMouseClicked
+
+    private void photoLblMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_photoLblMouseReleased
+         infoBuleLbl.setText("Faite une mise à jours");
+        infoBuleLbl.setEnabled(true);
+        File fichierPhoto;
+        JFileChooser fichierArechercher = new JFileChooser();
+        int etatRetour = fichierArechercher.showOpenDialog(SaisieComptes.this);
+        if(etatRetour == JFileChooser.APPROVE_OPTION){
+            fichierPhoto = fichierArechercher.getSelectedFile();
+            logoComptesUrl = fichierPhoto.toString();
+              setUrlPhoto(logoComptesUrl);//prise en compte de l'url de l'image
+            setPhoto(logoComptesUrl);
+        }
+    }//GEN-LAST:event_photoLblMouseReleased
+
+    private void annulerCptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_annulerCptBtnActionPerformed
+            // Annuler les Informations
+        String[] Annulation = {"Oui", "Non"}; 
+    int rangAnnulation;
+      rangAnnulation = JOptionPane.showOptionDialog(null, "Voulez-vous vraiment annuler ces informations?", "Annuler cet Enregistrement !",
+                 JOptionPane.YES_NO_OPTION, JOptionPane.OK_OPTION,
+                null,  Annulation, Annulation[1]);
+      String selectionner=Annulation[rangAnnulation];
+      if("Oui".equals(selectionner)){
+        resetComptes();
+      }
+    }//GEN-LAST:event_annulerCptBtnActionPerformed
+
+    private void validerCptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validerCptBtnActionPerformed
+  rang = JOptionPane.showOptionDialog(null, "Veuillez confirmer cet enregistrement !", "Enregistrement !",
+                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null,  confirmation, confirmation[2]);
+      String selectionner=confirmation[rang];
+      if("Valider".equals(selectionner)){
+           setDonnees(); 
+           testSaisiePrioritaire();
+            if(testSaisie== true) {
+                fichierTelch.copierImage(urlPhoto);
+               String informations = compte+";"+ infoComptes +";" +logoComptesUrl+ ";" +categorie+ "; "+lienHttp+ ";"  +version+";" + sgbd+ ";"+ login+";"+passWord+";"+algoDeSecurite+";"+decalage+";"+indice+";"+thePass;
+          ecrireLeComptes(informations);
+          ecrireHistoComptes(informations);
+          dispose(); 
+            } 
+           
+         
+      }
+      else if("Annuler".equals(selectionner)){
+          resetComptes();
+      }
+      else{
+          dispose();
+      }  
+    }//GEN-LAST:event_validerCptBtnActionPerformed
+
+    private void securiteCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_securiteCBoxActionPerformed
+        if(securiteCBox.getSelectedItem()=="Cesar"){
+              decalageCesarLbl.setVisible(true);
+              decalageCesarCBox.setVisible(true);  
+              String decalage = (String) decalageCesarCBox.getSelectedItem();
+               encodeSms = Encodage(Integer.parseInt(decalage), pwdSaisie);
+                 encryptPasseLbl.setVisible(true);
+                 encryptePwdLbl.setVisible(true); 
+                 encryptePwdLbl.setText(getEncodeSms());  
+            }
+        else { 
+             decalageCesarLbl.setVisible(false);
+             decalageCesarCBox.setVisible(false);
+             if(securiteCBox.getSelectedItem()=="Binaire"){
+                 if(pwdSaisie.length()>5){
+                       JOptionPane.showMessageDialog(null,"Codage binaire impossible le nombre de caractère de votre information doit être dans [1 ; 5]", "Message d'avertissement",JOptionPane.ERROR_MESSAGE);
+                       securiteCBox.setSelectedIndex(0);//reinitialisation pour reselection
+                 }
+                 else{
+                  encodeSms = binaryEncodage(pwdSaisie);
+                 encryptPasseLbl.setVisible(true);
+                 encryptePwdLbl.setVisible(true); 
+                 encryptePwdLbl.setText(getEncodeSms()); 
+                 }
+                 
+                
+             }
+        }
+    }//GEN-LAST:event_securiteCBoxActionPerformed
+
+    private void decalageCesarCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decalageCesarCBoxActionPerformed
+            encodeSms = Encodage((decalageCesarCBox.getSelectedIndex()), pwdSaisie);
+              encryptePwdLbl.setText(getEncodeSms()); 
+    }//GEN-LAST:event_decalageCesarCBoxActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel InformationSup;
+    private javax.swing.JButton annulerCptBtn;
+    private javax.swing.JSeparator blocA;
+    private javax.swing.JSeparator blocB;
+    private javax.swing.JComboBox categorieCBox;
+    private javax.swing.JLabel categorieLbl;
+    private javax.swing.JTextField compteTfld;
+    private javax.swing.JLabel comptesLbl;
+    private javax.swing.JComboBox decalageCesarCBox;
+    private javax.swing.JLabel decalageCesarLbl;
+    private javax.swing.JLabel encodageInfoLbl;
+    private javax.swing.JLabel encryptPasseLbl;
+    private javax.swing.JLabel encryptePwdLbl;
+    private javax.swing.JLabel infoBuleLbl;
+    private javax.swing.JLabel infoRequiseLbl2;
+    private javax.swing.JLabel infoRequiseLbl3;
+    private javax.swing.JLabel infoRequiseLbl4;
+    private javax.swing.JComboBox laMessagerieCBox;
+    private javax.swing.JLabel laMessagerieLbl;
+    private javax.swing.JLabel lienLbl;
+    private javax.swing.JTextField lienTfld;
+    private javax.swing.JLabel loginLbl;
+    private javax.swing.JTextField loginTfld;
+    private javax.swing.JLabel photoLbl;
+    private javax.swing.JLabel pwdLb;
+    private javax.swing.JPasswordField pwdTfld;
+    private javax.swing.JComboBox securiteCBox;
+    private javax.swing.JCheckBox securiteJcBox;
+    private javax.swing.JLabel securiteLbl;
+    private javax.swing.JComboBox sgbdCBox;
+    private javax.swing.JLabel sgbdLbl;
+    private javax.swing.JLabel utilisateurLbl;
+    private javax.swing.JButton validerCptBtn;
+    private javax.swing.JComboBox versionCBox;
+    private javax.swing.JLabel versionLbl;
+    private javax.swing.JCheckBox visuelPwdJcBox;
+    private javax.swing.JLabel visuelPwdLbl;
+    // End of variables declaration//GEN-END:variables
+ 
+    
+ private void ecrireLeComptes(String tmp){
+     //lire le fichier listecontact.txt et le memoriser son contenu dans une liste
+     lireLesComptes();
+     //Enregistrer le neo contact en fin de la liste 
+     listeComptes.add(tmp);
+     //Ecrire l'integralite de la liste dans le fichier listecontact.txt
+     ecrireLesComptes();
+ }
+ public void supprimer(int tmp){
+     //lire le fichier listecontact.txt et le memoriser son contenu dans une liste
+     lireLesComptes();
+     //Supprimer le contact positionner à l'indice tmp
+     listeComptes.remove(tmp);
+     //Ecrire l'integralite de la liste dans le fichier listecontact.txt
+     ecrireLesComptes();
+ }
+ private void lireLesComptes(){
+     listeComptes = new ArrayList();
+     Fichier leFichier = new  Fichier();
+     leFichier.ouvrirEnLecture(databaseComptesUrl);
+     String chaine ="";
+     do{
+         chaine = leFichier.lire();
+         if (chaine != null) {
+             listeComptes.add(chaine);
+         }
+     }while(chaine != null);
+     leFichier.fermer();
+ }
+ private void ecrireLesComptes(){
+     Fichier leFichier = new Fichier();
+     leFichier.ouvrirEnEcriture(databaseComptesUrl);
+     for(Object e: listeComptes){
+         leFichier.ecrire((String) e);
+     }
+     leFichier.fermer();
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ private void ecrireHistoComptes(String tmp){
+     //lire le fichier listecontact.txt et le memoriser son contenu dans une liste
+     lireHistoComptes();
+     //Enregistrer le neo contact en fin de la liste 
+     historiqueComptes.add(tmp);
+     //Ecrire l'integralite de la liste dans le fichier listecontact.txt
+     ecrireHistoComptes();
+ }
+ public void supprimerHisto(int tmp){
+     //lire le fichier listecontact.txt et le memoriser son contenu dans une liste
+     lireHistoComptes();
+     //Supprimer le contact positionner à l'indice tmp
+     historiqueComptes.remove(tmp);
+     //Ecrire l'integralite de la liste dans le fichier listecontact.txt
+     ecrireHistoComptes();
+ }
+ private void lireHistoComptes(){
+     historiqueComptes = new ArrayList();
+     Fichier leFichier = new  Fichier();
+//     leFichier.ouvrirEnLecture(histoDatabaseComptesUrl);
+     String chaine ="";
+     do{
+         chaine = leFichier.lire();
+         if (chaine != null) {
+             historiqueComptes.add(chaine);
+         }
+     }while(chaine != null);
+     leFichier.fermer();
+ }
+ private void ecrireHistoComptes(){
+     Fichier leFichier = new Fichier();
+//     leFichier.ouvrirEnEcriture(histoDatabaseComptesUrl);
+     for(Object e: historiqueComptes){
+         leFichier.ecrire((String) e);
+     }
+     leFichier.fermer();
+ }
+ 
+ 
+ 
+ 
+    
+    
+  //Recupére les does mise ajour dans la boite de dialogue
+ public boolean  getDonnees(){
+     return true;
+ }
+   private void setDonnees(){
+        setCompte(compteTfld.getText());
+        setInfoComptes((String)laMessagerieCBox.getSelectedItem()); 
+        setCategorie((String)categorieCBox.getSelectedItem());
+        setLienHttp(lienTfld.getText()); 
+        setVersion((String)versionCBox.getSelectedItem());
+        setSgbd((String)sgbdCBox.getSelectedItem());
+        setLogin(loginTfld.getText()); 
+        setThePass(password());
+        setPassWord(getEncodeSms());//recoit le pwd encodé
+        setAlgoDeSecurite((String)securiteCBox.getSelectedItem());
+        setDecalage((String)decalageCesarCBox.getSelectedItem());
+//        setIndice(totalIndice());
+        
+    }    
+  
+   
+   
+   
+//changer la couleur du composant apres validation du click
+    private void changerCouleur(JCheckBox tmp) {
+    tmp.setForeground(new java.awt.Color(0, 153, 51));
+      tmp.setOpaque(true); }
+    //reinitialise la couleur du composant apres validation du click
+    private void resetCouleur(JCheckBox tmp) {
+    tmp.setForeground(Color.red);
+      tmp.setOpaque(true); }
+    
+     private void changerCouleur(JLabel  tmp) {
+      tmp.setForeground(new java.awt.Color(0, 153, 51));
+      tmp.setOpaque(true);
+     }
+ private void resetCouleur(JLabel tmp){
+     tmp.setForeground(Color.red);
+     tmp.setOpaque(true);
+ }
+
+    private void resetComptes() { 
+    compteTfld.setText("");
+    categorieCBox.setSelectedIndex(0);
+    laMessagerieCBox.setSelectedIndex(0);
+    lienTfld.setText(""); 
+    versionCBox.setSelectedIndex(0);
+    sgbdCBox.setSelectedIndex(0);
+    loginTfld.setText("");
+    pwdTfld.setText("");
+    visuelPwdJcBox.setSelected(false);
+    visuelPwdLbl.setText("le mot de passe");
+    visuelPwdLbl.setEnabled(false);
+    securiteJcBox.setSelected(false);
+    securiteCBox.setSelectedIndex(0);
+    securiteCBox.setEnabled(false);
+    encodageInfoLbl.setEnabled(false);
+    encryptPasseLbl.setVisible(false);
+    encryptePwdLbl.setVisible(false);
+    resetCouleur(securiteJcBox);
+    resetCouleur(securiteLbl);
+    pwdTfld.setEnabled(true);
+    }
+
+public String Encodage(int decalage,String sms) {
+        this.texte=sms;
+        StringBuilder sb = new StringBuilder(texte.length());
+        for (char c : texte.toCharArray()) {
+            if (c >='a' && c <= 'z') {
+                sb.append(decaleVar(c, decalage, 'a'));
+            } else if (c > 'A' && c < 'Z') {
+                sb.append(decaleVar(c, decalage, 'A'));
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+ private char decaleVar(char caractere, int decalage, char caractereBase) {
+        int base = (int) caractereBase;
+        if (decalage < 0) {
+            base += TAILLE_ALPHABET - 1;
+        }
+        return (char) ((((int) caractere) - base + decalage) % TAILLE_ALPHABET + base);
+    }
+
+    public String getEncodeSms() {
+        return encodeSms;
+    }
+
+    public void setEncodeSms(String encodeSms) {
+        this.encodeSms = encodeSms;
+    }
+
+    
+    
+    public String binaryEncodage(String password){
+        HexEncode asciiToHexa= new HexEncode(); 
+        String hexadecimal=asciiToHexa.runHexaCode(password);
+         //Convertion  Hexa decimal  vers Decimal en Java
+        long decimal = Long.parseLong(hexadecimal, 16);
+         //Convertion hexa decimal vers binaire en Java       
+        String binary = Long.toBinaryString(decimal);  
+        return  binary;
+    }
+    
+    
+    
+    
+   
+//  //Totatl des indice pour affecter a chaque compte un indice unique
+//    private int totalIndice(){
+//        String chaine;
+//    	Fichier fic = new Fichier(); fic.ouvrirEnLecture(fichierConfig.getHistoDatabaseComptesUrl());
+//    	int i = 0;
+//    	do{
+//    		chaine = fic.lire();
+//    		if (chaine != null) { 
+//    			i++;
+//    		}
+//    	} while (chaine != null);
+//                       indice=i; 
+//    	fic.fermer();
+//        return i;
+//    }
+
+  public void testSaisiePrioritaire(){
+        String nonCompte =compteTfld.getText();
+        String leLogin = loginTfld.getText();
+        char[] mdpasse = pwdTfld.getPassword(); 
+        String typeSecurite = (String)securiteCBox.getSelectedItem();
+        if("".equals(nonCompte) || "".equals(leLogin) || "".equals(mdpasse)||"? - ?".equals(typeSecurite) )
+        {   testSaisie=false;
+        rang = JOptionPane.showOptionDialog(null, "Oubps !!!  veillez renseigner les informations réquise: celles avec une *, ou verifiez le type de sécurité", "Enregistrement !",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null,  confirmationRec, confirmationRec[1]);
+        String selectionner=confirmationRec[rang];
+        if("Quitter".equals(selectionner)){
+            dispose();
+        }
+        }else{
+            testSaisie=true;
+        }
+    }
+
+
+}

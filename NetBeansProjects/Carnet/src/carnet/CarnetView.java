@@ -4,6 +4,9 @@
 
 package carnet;
 
+import com.shelby.carnet.carnetUtils.Fichier;
+import java.awt.Color;
+import java.awt.Dimension;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -11,20 +14,47 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.border.Border;
 
 /**
  * The application's main frame.
  */
 public class CarnetView extends FrameView {
-
-    public CarnetView(SingleFrameApplication app) {
+private final Border cadre;
+    private int numero;
+    private int numeroPrec;
+    private int totalComptes=0;
+    private SaisieComptes saisieDialogComptes;
+    private Comptes[] listeComptes;
+    //private ComptesSupMultiple[] listeComptesSup;
+    private int nbreClics=0;
+    int[] tabFinalNbre= new int[1000];
+    private int tailleTabFinalSuprimer;
+    boolean selectionMultiple=false;
+    private boolean jeSelectionneTous;//pour clarifier le type de suppression
+    DatabaseTxt txtDb = new DatabaseTxt();
+    String databaseCompteUrl =txtDb.getDatabaseCompteUrl();
+    
+    
+    
+   public CarnetView(SingleFrameApplication app) {
         super(app);
 
         initComponents();
+        initComptes();
+        totalComptes();
+        
+        cadre = BorderFactory.createLineBorder(Color.RED);
+        
+        
+        
+        
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -102,8 +132,10 @@ public class CarnetView extends FrameView {
 
         mainPanel = new javax.swing.JPanel();
         boiteGlobale = new javax.swing.JPanel();
-        boiteContactsPnl = new javax.swing.JPanel();
-        boiteInformationPnl = new javax.swing.JPanel();
+        boiteAvecScroll = new javax.swing.JPanel();
+        scrollComptes = new javax.swing.JScrollPane();
+        boiteComptes = new javax.swing.JPanel();
+        boiteInfosCpts = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -114,47 +146,59 @@ public class CarnetView extends FrameView {
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
+        addBtn = new javax.swing.JButton();
+        delBtn = new javax.swing.JButton();
+        numerosCptsLbl = new javax.swing.JLabel();
+        totalnumerosCptsLbl = new javax.swing.JLabel();
 
         mainPanel.setName("mainPanel"); // NOI18N
 
         boiteGlobale.setName("boiteGlobale"); // NOI18N
         boiteGlobale.setLayout(new java.awt.GridLayout(1, 0));
 
-        boiteContactsPnl.setBackground(new java.awt.Color(255, 255, 255));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(carnet.CarnetApp.class).getContext().getResourceMap(CarnetView.class);
-        boiteContactsPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteContactsPnl.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Utopia", 0, 19), new java.awt.Color(45, 23, 250))); // NOI18N
-        boiteContactsPnl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 15)); // NOI18N
-        boiteContactsPnl.setName("boiteContactsPnl"); // NOI18N
+        boiteAvecScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteAvecScroll.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("LM Roman Dunhill 10", 0, 24), new java.awt.Color(0, 0, 153))); // NOI18N
+        boiteAvecScroll.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 15)); // NOI18N
+        boiteAvecScroll.setName("boiteAvecScroll"); // NOI18N
 
-        javax.swing.GroupLayout boiteContactsPnlLayout = new javax.swing.GroupLayout(boiteContactsPnl);
-        boiteContactsPnl.setLayout(boiteContactsPnlLayout);
-        boiteContactsPnlLayout.setHorizontalGroup(
-            boiteContactsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
+        scrollComptes.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollComptes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        scrollComptes.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        scrollComptes.setName("scrollComptes"); // NOI18N
+
+        boiteComptes.setFont(new java.awt.Font("Palatino Linotype", 0, 12)); // NOI18N
+        boiteComptes.setName("boiteComptes"); // NOI18N
+
+        javax.swing.GroupLayout boiteComptesLayout = new javax.swing.GroupLayout(boiteComptes);
+        boiteComptes.setLayout(boiteComptesLayout);
+        boiteComptesLayout.setHorizontalGroup(
+            boiteComptesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
-        boiteContactsPnlLayout.setVerticalGroup(
-            boiteContactsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 421, Short.MAX_VALUE)
-        );
-
-        boiteGlobale.add(boiteContactsPnl);
-
-        boiteInformationPnl.setBackground(new java.awt.Color(255, 255, 255));
-        boiteInformationPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteInformationPnl.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Utopia", 0, 19), new java.awt.Color(27, 15, 248))); // NOI18N
-        boiteInformationPnl.setName("boiteInformationPnl"); // NOI18N
-
-        javax.swing.GroupLayout boiteInformationPnlLayout = new javax.swing.GroupLayout(boiteInformationPnl);
-        boiteInformationPnl.setLayout(boiteInformationPnlLayout);
-        boiteInformationPnlLayout.setHorizontalGroup(
-            boiteInformationPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 290, Short.MAX_VALUE)
-        );
-        boiteInformationPnlLayout.setVerticalGroup(
-            boiteInformationPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 421, Short.MAX_VALUE)
+        boiteComptesLayout.setVerticalGroup(
+            boiteComptesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 529, Short.MAX_VALUE)
         );
 
-        boiteGlobale.add(boiteInformationPnl);
+        scrollComptes.setViewportView(boiteComptes);
+
+        javax.swing.GroupLayout boiteAvecScrollLayout = new javax.swing.GroupLayout(boiteAvecScroll);
+        boiteAvecScroll.setLayout(boiteAvecScrollLayout);
+        boiteAvecScrollLayout.setHorizontalGroup(
+            boiteAvecScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollComptes, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+        );
+        boiteAvecScrollLayout.setVerticalGroup(
+            boiteAvecScrollLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollComptes, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+        );
+
+        boiteGlobale.add(boiteAvecScroll);
+
+        boiteInfosCpts.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteInfosCpts.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("LM Roman Dunhill 10", 1, 24), resourceMap.getColor("boiteInfosCpts.border.titleColor"))); // NOI18N
+        boiteInfosCpts.setName("boiteInfosCpts"); // NOI18N
+        boiteInfosCpts.setLayout(new java.awt.BorderLayout());
+        boiteGlobale.add(boiteInfosCpts);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -201,20 +245,56 @@ public class CarnetView extends FrameView {
 
         progressBar.setName("progressBar"); // NOI18N
 
+        addBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 18)); // NOI18N
+        addBtn.setText(resourceMap.getString("addBtn.text")); // NOI18N
+        addBtn.setToolTipText(resourceMap.getString("addBtn.toolTipText")); // NOI18N
+        addBtn.setName("addBtn"); // NOI18N
+
+        delBtn.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 18)); // NOI18N
+        delBtn.setText(resourceMap.getString("delBtn.text")); // NOI18N
+        delBtn.setToolTipText(resourceMap.getString("delBtn.toolTipText")); // NOI18N
+        delBtn.setName("delBtn"); // NOI18N
+
+        numerosCptsLbl.setBackground(java.awt.Color.white);
+        numerosCptsLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 15)); // NOI18N
+        numerosCptsLbl.setText(resourceMap.getString("numerosCptsLbl.text")); // NOI18N
+        numerosCptsLbl.setName("numerosCptsLbl"); // NOI18N
+        numerosCptsLbl.setOpaque(true);
+
+        totalnumerosCptsLbl.setBackground(java.awt.Color.white);
+        totalnumerosCptsLbl.setFont(new java.awt.Font("LM Roman Dunhill 10", 0, 15)); // NOI18N
+        totalnumerosCptsLbl.setForeground(resourceMap.getColor("totalnumerosCptsLbl.foreground")); // NOI18N
+        totalnumerosCptsLbl.setText(resourceMap.getString("totalnumerosCptsLbl.text")); // NOI18N
+        totalnumerosCptsLbl.setName("totalnumerosCptsLbl"); // NOI18N
+        totalnumerosCptsLbl.setOpaque(true);
+
         javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 430, Short.MAX_VALUE)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(statusAnimationLabel)
-                .addContainerGap())
+                .addComponent(addBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                    .addGroup(statusPanelLayout.createSequentialGroup()
+                        .addComponent(delBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(numerosCptsLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalnumerosCptsLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(statusAnimationLabel)
+                        .addContainerGap())))
         );
+
+        statusPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {numerosCptsLbl, totalnumerosCptsLbl});
+
         statusPanelLayout.setVerticalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(statusPanelLayout.createSequentialGroup()
@@ -225,7 +305,16 @@ public class CarnetView extends FrameView {
                     .addComponent(statusAnimationLabel)
                     .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statusPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn)
+                    .addComponent(delBtn)
+                    .addComponent(numerosCptsLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalnumerosCptsLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        statusPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {numerosCptsLbl, totalnumerosCptsLbl});
 
         setComponent(mainPanel);
         setMenuBar(menuBar);
@@ -233,15 +322,21 @@ public class CarnetView extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel boiteContactsPnl;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JPanel boiteAvecScroll;
+    private javax.swing.JPanel boiteComptes;
     private javax.swing.JPanel boiteGlobale;
-    private javax.swing.JPanel boiteInformationPnl;
+    private javax.swing.JPanel boiteInfosCpts;
+    private javax.swing.JButton delBtn;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JLabel numerosCptsLbl;
     private javax.swing.JProgressBar progressBar;
+    private javax.swing.JScrollPane scrollComptes;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JLabel totalnumerosCptsLbl;
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;
@@ -251,4 +346,92 @@ public class CarnetView extends FrameView {
     private int busyIconIndex = 0;
 
     private JDialog aboutBox;
+
+    private void initComptes() {
+       Dimension taille ;
+        String chaine;
+        String [] info = new String[8];
+        listeComptes = new Comptes[50];
+        Fichier fic = new Fichier(); fic.ouvrirEnLecture(databaseCompteUrl);
+        int i = 0;
+        do{
+            chaine = fic.lire();
+            if (chaine != null) {
+                info = fic.extraireDonnees(chaine);
+                listeComptes[i]  = new Comptes(info, i);
+                taille = listeComptes[i].getPreferredSize();
+                listeComptes[i].setBounds(0, i*(taille.height+2), taille.width, taille.height);
+                boiteComptes.add(listeComptes[i]);
+                taille.setSize(taille.width, (i+1)*(taille.height+2));
+                boiteComptes.setPreferredSize(taille);
+                boiteComptes.validate();
+                
+                //                    Mise en place d'un mouse listner pour naviger a l'aide de la
+                //                    sourie sur les differents contacts
+                
+                listeComptes[i].addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseReleased(java.awt.event.MouseEvent evt) { comptesMouseReleased(evt);}
+                });
+                i++;
+            }
+        } while (chaine != null);
+        fic.fermer();
+        //affiche les infos du  contact N°1
+        boiteInfosCpts.add(new ComptesInfos(listeComptes[0].getListeInfos())) ;
+        boiteInfosCpts.validate();
+    }
+    /**
+     * Cette methode Permet de realiser la selection de chaque Comptes tout
+     * ceci en se servant de notre sourie d'ou le MouseRelease
+     */
+    private void comptesMouseReleased(MouseEvent evt) {
+        numeroPrec = numero;
+        Comptes compteSelectionne = (Comptes) evt.getSource();
+        numero = compteSelectionne.getId();
+        setNumero(numero);
+        ComptesInfos info= new ComptesInfos(listeComptes[numero].getListeInfos());
+        numerosCptsLbl.setText(Integer.toString(getNumero()+1));
+        boiteInfosCpts.add(new ComptesInfos(listeComptes[numero].getListeInfos())) ;
+        listeComptes[numero].setBorder(cadre);
+        
+        if(numero== numeroPrec){//Lorsque l'on double clic sur un contact
+            listeComptes[numeroPrec].setBorder(cadre);
+            listeComptes[numeroPrec].setBackground(Color.RED);
+        }
+        else{ listeComptes[numeroPrec].setBorder(null);
+        listeComptes[numeroPrec].setBackground(null);
+        }
+        
+        boiteInfosCpts.validate();
+    }
+
+    private void totalComptes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+       //----------------------------------debut ACCESSEURS ET MODIFICATEURS ------------------------------
+    /**
+     * Accesseur et modificateur de Numero pour nous permetre de connaitre
+     * les differentes numero ainsi que le total d'enregistrement
+     */
+    public int getNumero() {
+        return numero;
+    }
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    /**
+     * Accesseur et modificateur de Numero pour nous permetre de connaitre
+     * la taille du tableau contenant le elements a supprimer
+     */
+    public int getTailleTabFinalSuprimer() {
+        return tailleTabFinalSuprimer;
+    }
+    public void setTailleTabFinalSuprimer(int tailleTabFinalSuprimer) {
+        this.tailleTabFinalSuprimer = tailleTabFinalSuprimer;
+    }
+    
+    //----------------------------------fin ACCESSEURS ET MODIFICATEURS ------------------------------
+
 }
