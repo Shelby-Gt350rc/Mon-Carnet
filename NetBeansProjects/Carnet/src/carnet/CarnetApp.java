@@ -4,7 +4,9 @@
 
 package carnet;
 
+import com.shelby.carnet.carnetUtils.Install;
 import com.shelby.carnet.security.login.LoginGui;
+import java.io.File;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -12,6 +14,28 @@ import org.jdesktop.application.SingleFrameApplication;
  * The main class of the application.
  */
 public class CarnetApp extends SingleFrameApplication {
+    private static String dossier = "../../CarnetAppsSrc/images";
+    
+    /**
+	 * Methode pour joindre le fichier Login.java
+	 * en vue de se connecter a notre application.
+	 */
+	private static void authentification() {
+		LoginGui monLogin = new LoginGui();
+		monLogin.setVisible(true); 
+	}
+
+	private static void verifDatabase() {
+		if (!new File(dossier).exists()){
+			Install installation = new Install();
+			installation.setVisible(true);
+		}else{
+			authentification();
+		}
+	}
+    
+    
+    
 
     /**
      * At startup create and show the main frame of the application.
@@ -54,8 +78,5 @@ public class CarnetApp extends SingleFrameApplication {
     public void runApp() {
         launch(CarnetApp.class, arg);
     }
-    private static void authentification() {
-        LoginGui monLogin = new LoginGui();
-        monLogin.setVisible(true);
-    }
+  
 }
