@@ -99,7 +99,10 @@ public final class Comptes extends javax.swing.JPanel {
         nomCompteLbl = new javax.swing.JLabel();
         utilisateurCompteLbl = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(390, 50));
+        setMinimumSize(new java.awt.Dimension(390, 50));
         setName("Form"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(380, 50));
         setLayout(new java.awt.GridLayout(1, 0));
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(com.shelby.carnet.CarnetApp.class).getContext().getResourceMap(Comptes.class);
