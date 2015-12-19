@@ -4,6 +4,7 @@
 
 package com.shelby.carnet;
 
+import com.shelby.carnet.config.database.Fichier;
 import java.awt.Dimension;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
@@ -278,43 +279,41 @@ public class CarnetView extends FrameView {
     private JDialog aboutBox;
 
     private void initComptes() {
-        //declaration d'un tableau a 2 dim
-        String [][] tabComptes ={
-                                                    {"Gmail","Patrick","../Photos/photos.png"},
-                                                    {"Gmail","Dr Zhen","../Photos/photos.png"},
-                                                    {"Gmail","Shelby","../Photos/photos.png"},
-                                                    {"Gmail","Patrick","../Photos/photos.png"},
-                                                    {"Gmail","Dr Zhen","../Photos/photos.png"},
-                                                    {"Gmail","Shelby","../Photos/photos.png"},
-                                                    {"Gmail","Patrick","../Photos/photos.png"},
-                                                    {"Gmail","Dr Zhen","../Photos/photos.png"},
-                                                    {"Gmail","Shelby","../Photos/photos.png"},
-                                                    {"Gmail","Patrick","../Photos/photos.png"},
-                                                    {"Gmail","Dr Zhen","../Photos/photos.png"},
-                                                    {"Gmail","Shelby","../Photos/photos.png"},
-                                                    {"Gmail","Patrick","../Photos/photos.png"},
-                                                    {"Gmail","Dr Zhen","../Photos/photos.png"},
-                                                    {"Gmail","Shelby","../Photos/photos.png"},
-                                                    {"Gmail","Patrick","../Photos/photos.png"},
-                                                    {"Gmail","Dr Zhen","../Photos/photos.png"},
-                                                    {"Gmail","Shelby","../Photos/photos.png"},
-                                                    {"Gmail","Ryusaky","../Photos/photos.png"}
-                                          };
+
         //Declaration de la variable de type dimession pour recuperer la taille de nos objet
         Dimension taille;
-                                 listeComptes  = new Comptes[tabComptes.length];
-                                for (int i = 0; i < tabComptes.length; i++) {
-                                    listeComptes[i] = new Comptes(tabComptes[i], i);
-                                    taille = listeComptes[i].getPreferredSize();
-                                    //2 represente le pixel d'ecart entre chaque composant
-                                    listeComptes[i].setBounds(0, i*(taille.height+2), taille.width, taille.height); 
-                                    boiteComptesPnl.add(listeComptes[i]);
-                                    //Modifier la taille de la boite Compte en fonction du nbre d'element ajouter
-                                    taille.setSize(taille.width,(i+1)*(taille.height+2));
-                                    boiteComptesPnl.setPreferredSize(taille);
-                                    //Ajout des elements a la boite de comptes
-                                    boiteComptesPnl.validate();
-                                }
+        String chaine;
+        String [] info = new String[8];//on defini un tableau d'informations ayant maxi 8 elements que nous allons parcourir
+                                 listeComptes  = new Comptes[50];// creation d'une liste de 50 comptes
+                                 //creation d'un fichier fic pour lire la chaine
+                                 Fichier fic = new Fichier();
+                                 //ouverture en lecture
+                                 fic.ouvrirEnLecture("../../database/listeComptes.txt");
+                                 int i = 0; //compteur
+                             do{
+                                 //verifier si la lecture du fichier se fait correctement 
+                                 chaine = fic.lire();
+                                 System.out.println(chaine);
+                                 //avant extraction on test si nous sommes en fin de fichier 
+                                 if(chaine != null){
+                                 
+                                        //Recupération des données extraits   dans un tableau
+                                        info = fic.extraireDonnees(chaine);
+
+                                           listeComptes[i] = new Comptes(info, i);
+                                           taille = listeComptes[i].getPreferredSize();
+                                           //2 represente le pixel d'ecart entre chaque composant
+                                           listeComptes[i].setBounds(0, i*(taille.height+2), taille.width, taille.height); 
+                                           boiteComptesPnl.add(listeComptes[i]);
+                                           //Modifier la taille de la boite Compte en fonction du nbre d'element ajouter
+                                           taille.setSize(taille.width,(i+1)*(taille.height+2));
+                                           boiteComptesPnl.setPreferredSize(taille);
+                                           //Ajout des elements a la boite de comptes
+                                           boiteComptesPnl.validate();
+                                           //après avoir lu et creer le compte on incremente de 1
+                                           i++;
+                                        }
+                                }while(chaine != null);
                                 
         }
     
