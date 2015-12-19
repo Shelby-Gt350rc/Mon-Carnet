@@ -5,6 +5,7 @@
 package com.shelby.carnet;
 
 import com.shelby.carnet.config.database.Fichier;
+import java.awt.Color;
 import java.awt.Dimension;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
@@ -13,10 +14,13 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.border.Border;
 
 /**
  * The application's main frame.
@@ -29,6 +33,8 @@ public class CarnetView extends FrameView {
         initComponents();
         //initialisation des Comptes
         initComptes();
+        //Mise en place du cadre de coleur Rouge
+        cadre = BorderFactory.createLineBorder(Color.RED);
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -85,6 +91,7 @@ public class CarnetView extends FrameView {
         });
     }
 
+
     @Action
     public void showAboutBox() {
         if (aboutBox == null) {
@@ -122,6 +129,7 @@ public class CarnetView extends FrameView {
         progressBar = new javax.swing.JProgressBar();
 
         mainPanel.setName("mainPanel"); // NOI18N
+        mainPanel.setPreferredSize(new java.awt.Dimension(815, 455));
 
         boiteGlobalePnl.setName("boiteGlobalePnl"); // NOI18N
         boiteGlobalePnl.setLayout(new java.awt.GridLayout(1, 2));
@@ -161,20 +169,10 @@ public class CarnetView extends FrameView {
 
         boiteGlobalePnl.add(boiteAvecSroll);
 
+        boiteInformationsPnl.setBackground(java.awt.Color.white);
         boiteInformationsPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("boiteInformationsPnl.border.title"), javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("LM Roman Dunhill 10", 0, 24), new java.awt.Color(0, 0, 153))); // NOI18N
         boiteInformationsPnl.setName("boiteInformationsPnl"); // NOI18N
-
-        javax.swing.GroupLayout boiteInformationsPnlLayout = new javax.swing.GroupLayout(boiteInformationsPnl);
-        boiteInformationsPnl.setLayout(boiteInformationsPnlLayout);
-        boiteInformationsPnlLayout.setHorizontalGroup(
-            boiteInformationsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
-        );
-        boiteInformationsPnlLayout.setVerticalGroup(
-            boiteInformationsPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 406, Short.MAX_VALUE)
-        );
-
+        boiteInformationsPnl.setLayout(new java.awt.BorderLayout());
         boiteGlobalePnl.add(boiteInformationsPnl);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
@@ -283,7 +281,7 @@ public class CarnetView extends FrameView {
         //Declaration de la variable de type dimession pour recuperer la taille de nos objet
         Dimension taille;
         String chaine;
-        String [] info = new String[8];//on defini un tableau d'informations ayant maxi 8 elements que nous allons parcourir
+        String [] info = new String[7];//on defini un tableau d'informations ayant maxi 7 elements que nous allons parcourir
                                  listeComptes  = new Comptes[50];// creation d'une liste de 50 comptes
                                  //creation d'un fichier fic pour lire la chaine
                                  Fichier fic = new Fichier();
@@ -293,7 +291,7 @@ public class CarnetView extends FrameView {
                              do{
                                  //verifier si la lecture du fichier se fait correctement 
                                  chaine = fic.lire();
-                                 System.out.println(chaine);
+                                 //System.out.println(chaine);
                                  //avant extraction on test si nous sommes en fin de fichier 
                                  if(chaine != null){
                                  
@@ -310,13 +308,64 @@ public class CarnetView extends FrameView {
                                            boiteComptesPnl.setPreferredSize(taille);
                                            //Ajout des elements a la boite de comptes
                                            boiteComptesPnl.validate();
+                                            //Mise en place d'un mouse listner pour naviger a l'aide de la
+                                           // sourie sur les differents contacts
+                                           listeComptes[i].addMouseListener(new java.awt.event.MouseAdapter() {
+                                               @Override
+                                               public void mouseReleased(java.awt.event.MouseEvent evt) { comptesMouseReleased(evt);}
+                                           });
                                            //après avoir lu et creer le compte on incremente de 1
                                            i++;
+                                           //Mise en place d'un ecouteur d'evement sur chaque compte
+                                           
                                         }
                                 }while(chaine != null);
+                             fic.fermer();
+                              // affiche les infos du  contact N°1
+                                boiteInformationsPnl.add(new InfosComptes(listeComptes[0].getListeInfos())) ;
+                                boiteInformationsPnl.validate();
                                 
         }
+    /**
+     * Cette methode Permet de realiser la selection de chaque Contacts tout
+     * ceci en se servant de notre sourie d'ou le MouseRelease
+     */
+    private void comptesMouseReleased(MouseEvent evt) {
+            numeroPrec = numero;
+            Comptes comptesSelectionne = (Comptes) evt.getSource();
+            numero = comptesSelectionne.getId();
+            setNumero(numero);
+//            numeroCntLbl.setText(Integer.toString(getNumero()+1));
+            boiteInformationsPnl.add(new InfosComptes(listeComptes[numero].getListeInfos())) ;
+            listeComptes[numero].setBorder(cadre);
+            if(numero== numeroPrec){//Lorsque l'on double clic sur un contact
+                listeComptes[numeroPrec].setBorder(cadre);
+                listeComptes[numeroPrec].setBackground(Color.RED);
+            }
+            else{ listeComptes[numeroPrec].setBorder(null);
+            listeComptes[numeroPrec].setBackground(null);
+            } 
+            boiteInformationsPnl.validate();
+    }
     
     private Comptes[] listeComptes;
+    private int numero;
+    private int numeroPrec;
+    private int totalContacts=0;
+    private int totalComptes=0;
+    private final Border cadre;
+
+    
+    //----------------------------------debut ACCESSEURS ET MODIFICATEURS ------------------------------
+    /**
+     * Accesseur et modificateur de Numero pour nous permetre de connaitre
+     * les differentes numero ainsi que le total d'enregistrement
+     */
+    public int getNumero() {
+        return numero;
+    }
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
       
 }
